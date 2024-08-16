@@ -737,6 +737,24 @@ climdex.fd <- function(ci) { stopifnot(!is.null(ci@data$tmin)); return(number.da
 #' @export
 climdex.su <- function(ci) { stopifnot(!is.null(ci@data$tmax)); return(number.days.op.threshold(ci@data$tmax, ci@date.factors$annual, 25, ">") * ci@namasks$annual$tmax) }
 
+#' Threshold 35 C
+#'
+#' This function computes the days with max temperature above 35 degrees Celsius.
+#'
+#' This function takes a climdexInput object as input and computes the tx35 index: that is, the annual count of days where daily maximum
+#' temperature exceeds 35 degrees Celsius.
+#'
+#' @param ci Object of type climdexInput.
+#' @return A vector containing the number of days for each year.
+#' @template generic_seealso_references
+#' @templateVar cdxvar tx35
+#' @templateVar cdxdescription an annual timeseries of the number of days with max temperature above 35 degrees Celsius.
+#' @template get_generic_example
+#'
+#' @export
+climdex.tx35 <- function(ci) { stopifnot(!is.null(ci@data$tmax)); return(number.days.op.threshold(ci@data$tmax, ci@date.factors$annual, 35, ">") * ci@namasks$annual$tmax) }
+
+
 #' Icing Days
 #' 
 #' This function computes the climdex index ID.
@@ -1313,7 +1331,7 @@ climdex.prcptot <- function(ci) { stopifnot(!is.null(ci@data$prec)); return(tota
 #' func.names <- climdex.get.available.indices(ci)
 #' @export
 climdex.get.available.indices <- function(ci, function.names=TRUE) {
-  available.indices <- list(tmax=c('su', 'id', 'txx', 'txn', 'tx10p', 'tx90p', 'wsdi'),
+  available.indices <- list(tmax=c('su', 'tx35','id', 'txx', 'txn', 'tx10p', 'tx90p', 'wsdi'),
                             tmin=c('fd', 'tr', 'tnx', 'tnn', 'tn10p', 'tn90p', 'csdi'),
                             tavg=c('gsl', 'dtr'),
                             prec=c('rx1day', 'rx5day', 'sdii', 'r10mm', 'r20mm', 'rnnmm', 'cdd', 'cwd', 'r95ptot', 'r99ptot', 'prcptot'))
