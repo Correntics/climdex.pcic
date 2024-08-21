@@ -66,8 +66,8 @@ valid.climdexInput <- function(x) {
     if(is.null(quantiles[n]))
       return(NULL)
     ## FIXME: This test isn't necessarily valid and prevents calculating indices when no base period data is available.
-    if(!(n %in% ls(envir=x@quantiles)))
-      return(paste("Quantiles for", n, "are missing."))
+#     if(!(n %in% ls(envir=x@quantiles)))
+#       return(paste("Quantiles for", n, "are missing."))
     return(NULL)
   })))
 
