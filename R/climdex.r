@@ -320,6 +320,8 @@ check.quantile.validity <- function(quantiles, present.vars, days.in.base) {
     stop("Provided quantiles must be a list.")
   
   if(!all(present.vars %in% names(quantiles)))
+    print("Missing variables in quantiles:")
+    print(setdiff(present.vars, names(quantiles)))  # Shows which are missing
     stop("Quantiles must be present for all variables provided.\n")
 
   if(!all(sapply(quantiles[names(quantiles) %in% intersect(present.vars, c("tmax", "tmin"))], function(x) { "outbase" %in% names(x) && all(c("q10", "q90") %in% names(x$outbase)) })))
